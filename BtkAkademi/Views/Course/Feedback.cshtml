@@ -1,0 +1,25 @@
+﻿@model Candidate
+@{
+    ViewData["Title"] = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h3 class="display-4">Conguratulations @Model.FullName</h3>
+    <p class="lead">Your Application Has Been <mark>Accepted.</mark></p>
+    <p class="lead">Many Thanks For Your Interest.</p>
+    <hr />
+    <blockquote class="blockquote">
+        You Have Enrolled To @Model.SelectedCourse Course.
+    </blockquote>
+
+    <p class="text-muted">
+        You Applied At @Model.ApplyAt.
+    </p>
+
+    <div class="btn-group">
+        <a class="btn btn-outline-success" asp-action="Index">Applications</a>
+        <a class="btn btn-success" asp-action="Index" asp-controller="Home">Home</a>
+    </div>
+</div>
+
