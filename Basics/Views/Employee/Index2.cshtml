@@ -1,0 +1,17 @@
+﻿@model String[]
+@{
+    ViewData["Title"] = "Index2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h3 class="display-3">
+        Employee
+    </h3>
+    <div class="lead">
+        @foreach (var item in Model)
+        {
+            <p>@item</p>
+        }
+    </div>
+</div>

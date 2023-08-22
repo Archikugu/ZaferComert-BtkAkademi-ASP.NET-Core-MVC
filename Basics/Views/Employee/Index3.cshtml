@@ -1,0 +1,18 @@
+﻿@model List<Employee>
+@{
+    ViewData["Title"] = "Index3";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="display-3">
+    Index 3
+</div>
+@foreach (Employee employee in Model)
+{
+    <div class="lead my-2">
+        <h6>@employee.FullName</h6>
+        <p>@employee.ID</p>
+        <p><strong>Age:</strong> @employee.Age</p>
+    </div>
+}
+
