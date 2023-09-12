@@ -1,10 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StoreApp.Entities.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace StoreApp.Models
+namespace StoreApp.Repositories
 {
     public class RepositoryContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public RepositoryContext(DbContextOptions<RepositoryContext> options) : base(options)
         {
 
@@ -21,7 +28,14 @@ namespace StoreApp.Models
                 new Product() { ProductID = 3, ProductName = "Mouse", Price = 500 },
                 new Product() { ProductID = 4, ProductName = "Monitor", Price = 7_000 },
                 new Product() { ProductID = 5, ProductName = "Deck", Price = 1_500 }
-                ); 
+                );
+
+            modelBuilder.Entity<Category>()
+                .HasData
+                (
+                new Category() { CategoryID = 1, CategoryName = "Book" },
+                new Category() { CategoryID = 2, CategoryName = "Electronic" }
+                );
         }
     }
 }
