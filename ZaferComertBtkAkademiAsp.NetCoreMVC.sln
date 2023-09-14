@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreApp.Entities", "Store\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreApp.Repositories", "Store\StoreApp.Repositories\StoreApp.Repositories.csproj", "{DCC00257-DA34-437F-8DC5-F0141236282D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreApp.Services", "Store\StoreApp.Services\StoreApp.Services.csproj", "{CFD55756-5850-489C-BE44-C54FC9A3D20D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreApp.Services", "Store\StoreApp.Services\StoreApp.Services.csproj", "{CFD55756-5850-489C-BE44-C54FC9A3D20D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
