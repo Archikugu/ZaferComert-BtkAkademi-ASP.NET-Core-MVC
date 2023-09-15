@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoreApp.Entities.Models;
+using StoreApp.Repositories.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,22 +22,10 @@ namespace StoreApp.Repositories
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Product>()
-                .HasData
-                (
-                new Product() { ProductID = 1, ProductName = "Computer", Price = 17_000 },
-                new Product() { ProductID = 2, ProductName = "Keyboard", Price = 1_000 },
-                new Product() { ProductID = 3, ProductName = "Mouse", Price = 500 },
-                new Product() { ProductID = 4, ProductName = "Monitor", Price = 7_000 },
-                new Product() { ProductID = 5, ProductName = "Deck", Price = 1_500 }
-                );
+            //modelBuilder.ApplyConfiguration(new ProductConfig());
+            //modelBuilder.ApplyConfiguration(new CategoryConfig());
 
-            modelBuilder.Entity<Category>()
-                .HasData
-                (
-                new Category() { CategoryID = 1, CategoryName = "Book" },
-                new Category() { CategoryID = 2, CategoryName = "Electronic" }
-                );
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

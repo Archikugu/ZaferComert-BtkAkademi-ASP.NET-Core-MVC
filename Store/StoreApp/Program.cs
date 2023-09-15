@@ -21,6 +21,8 @@ builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 var app = builder.Build();
 
 app.UseStaticFiles();
@@ -32,7 +34,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(name: "Admin", areaName: "Admin", pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-  
+
 });
 
 

@@ -10,5 +10,7 @@ namespace StoreApp.Entities.Models
     {
         public int CategoryID { get; set; }
         public String CategoryName { get; set; } = String.Empty;
+
+        public ICollection<Product> Products { get; set; } // Collection navigation property
     }
 }

@@ -1,4 +1,6 @@
-﻿using StoreApp.Entities.Models;
+﻿using AutoMapper;
+using StoreApp.Entities.Dtos;
+using StoreApp.Entities.Models;
 using StoreApp.Repositories.Contracts;
 using StoreApp.Services.Contracts;
 using System;
@@ -12,14 +14,17 @@ namespace StoreApp.Services
     public class ProductManager : IProductService
     {
         private readonly IRepositoryManager _repositoryManager;
+        private readonly IMapper _mapper;
 
-        public ProductManager(IRepositoryManager repositoryManager)
+        public ProductManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
             _repositoryManager = repositoryManager;
+            _mapper = mapper;
         }
 
-        public void CreateProduct(Product product)
+        public void CreateProduct(ProductDtoForInsertion productDto)
         {
+            Product product = _mapper.Map<Product>(productDto);
             _repositoryManager.Product.Create(product);
             _repositoryManager.Save();
         }
@@ -49,11 +54,22 @@ namespace StoreApp.Services
             return product;
         }
 
-        public void UpdateOneProduct(Product product)
+        public ProductDtoForUpdate GetOneProductForUpdate(int id, bool trackChanges)
         {
-            var entity = _repositoryManager.Product.GetOneProduct(product.ProductID, true);
-            entity.ProductName = product.ProductName;
-            entity.Price = product.Price;
+            var product = GetOneProduct(id, trackChanges);
+            var productDto = _mapper.Map<ProductDtoForUpdate>(product);
+            return productDto;
+        }
+
+        public void UpdateOneProduct(ProductDtoForUpdate productDto)
+        {
+            //var entity = _repositoryManager.Product.GetOneProduct(productDto.ProductID, true);
+            //entity.ProductName = productDto.ProductName;
+            //entity.Price = productDto.Price;
+            //entity.CategoryID = productDto.CategoryID;
+
+            var entity = _mapper.Map<Product>(productDto);
+            _repositoryManager.Product.UpdateOneProduct(entity);
             _repositoryManager.Save();
         }
     }

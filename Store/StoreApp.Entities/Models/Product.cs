@@ -10,10 +10,9 @@ namespace StoreApp.Entities.Models
     public class Product
     {
         public int ProductID { get; set; }
-        [Required(ErrorMessage ="Product Name is Required.")]
         public string? ProductName { get; set; } = string.Empty;
-
-        [Required(ErrorMessage = "Price is Required.")]
         public decimal Price { get; set; }
+        public int? CategoryID { get; set; }  //Foreign Key
+        public Category? Category { get; set; }  // Navigation Property
     }
 }
