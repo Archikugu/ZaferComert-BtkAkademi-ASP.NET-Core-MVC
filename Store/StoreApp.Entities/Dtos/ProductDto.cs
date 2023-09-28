@@ -16,6 +16,8 @@ namespace StoreApp.Entities.Dtos
 
         [Required(ErrorMessage = "Price is Required.")]
         public decimal Price { get; init; }
+        public string? Summary { get; init; } = string.Empty;
+        public string? ImageUrl { get; set; }
         public int? CategoryID { get; init; }
 
     }

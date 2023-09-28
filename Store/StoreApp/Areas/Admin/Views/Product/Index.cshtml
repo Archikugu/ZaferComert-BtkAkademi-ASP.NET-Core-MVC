@@ -16,6 +16,7 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th>ImageUrl</th>
                 <th>Product Name</th>
                 <th>Price</th>
                 <th>Operations</th>
@@ -27,6 +28,7 @@
                 count++;
                 <tr>
                     <td>@count</td>
+                    <td><img class="border border-primary" src="@item?.ImageUrl" / alt="@item?.ProductName" width="50"></td>
                     <td>@item.ProductName</td>
                     <td>@item.Price.ToString("c")</td>
                     <td>
