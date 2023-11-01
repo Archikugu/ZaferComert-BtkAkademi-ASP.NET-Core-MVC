@@ -1,4 +1,5 @@
-﻿@model Product
+﻿@using StoreApp.Infrastructure.Extensions
+@model Product
 
 <div class="col-sm-12 col-md-4 my-2">
     <div class="card" style="width: 18rem;">
@@ -12,7 +13,7 @@
 
                 <form id="@Model.ProductID" asp-page="/cart" method="post">
                     <input type="hidden" asp-for="ProductID" />
-                    <input type="hidden" name="returnUrl" value="/Product/Get/@Model.ProductID" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                     <button type="submit" class="btn btn-outline-primary">
                         <i class="fa fa-cart-plus"></i>
                     </button>

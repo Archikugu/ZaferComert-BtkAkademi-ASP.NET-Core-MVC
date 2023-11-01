@@ -1,7 +1,7 @@
 ﻿@model Product
 
 
-@section Header{
+@section Header {
     <div>
         Header for only Get
     </div>
@@ -20,10 +20,16 @@
     </div>
 </div>
 
-
-<div class="btn-group">
-    <a class="btn btn-primary" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>Home</a>
-    <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index"><i class="fa-solid fa-list"></i>Products</a>
+<div class="text-center">
+    <div class="btn-group">
+        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>Home</a>
+        <form id="@Model.ProductID" asp-page="/cart" method="post">
+        <input type="hidden" asp-for="ProductID" />    
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fa fa-cart-plus"></i>
+            </button>
+        </form>
+        <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index"><i class="fa-solid fa-list"></i>Products</a>
+    </div>
 </div>
-
-

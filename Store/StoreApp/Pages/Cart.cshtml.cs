@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StoreApp.Entities.Models;
+using StoreApp.Infrastructure.Extensions;
 using StoreApp.Services.Contracts;
 
 namespace StoreApp.Pages
@@ -8,13 +9,13 @@ namespace StoreApp.Pages
     public class CartModel : PageModel
     {
         private readonly IServiceManager _manager;
-       
+
         public Cart Cart { get; set; }
 
-        public CartModel(IServiceManager manager, Cart cart)
+        public CartModel(IServiceManager manager, Cart cartService)
         {
             _manager = manager;
-            Cart = cart;
+            Cart = cartService;
         }
 
         public string ReturnUrl { get; set; } = "/";
@@ -30,7 +31,7 @@ namespace StoreApp.Pages
             {
                 Cart.AddItem(product, 1);
             }
-            return Page();
+            return RedirectToPage(new { returnUrl = returnUrl });
         }
         public IActionResult OnPostRemove(int id, string returnUrl)
         {
