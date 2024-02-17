@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using StoreApp.Entities.Dtos;
 using StoreApp.Entities.Models;
+using StoreApp.Entities.RequestParameters;
 using StoreApp.Repositories.Contracts;
 using StoreApp.Services.Contracts;
 using System;
@@ -44,6 +45,11 @@ namespace StoreApp.Services
             return _repositoryManager.Product.GetAllProducts(trackChanges);
         }
 
+        public IEnumerable<Product> GetAllProductsWithDetails(ProductRequestParameters p)
+        {
+            return _repositoryManager.Product.GetAllProductsWithDetails(p);
+        }
+
         public Product? GetOneProduct(int id, bool trackChanges)
         {
             var product = _repositoryManager.Product.GetOneProduct(id, trackChanges);
@@ -59,6 +65,12 @@ namespace StoreApp.Services
             var product = GetOneProduct(id, trackChanges);
             var productDto = _mapper.Map<ProductDtoForUpdate>(product);
             return productDto;
+        }
+
+        public IEnumerable<Product> GetShowcaseProducts(bool trackChanges)
+        {
+            var products = _repositoryManager.Product.GetShowcaseProducts(trackChanges);
+            return products;
         }
 
         public void UpdateOneProduct(ProductDtoForUpdate productDto)

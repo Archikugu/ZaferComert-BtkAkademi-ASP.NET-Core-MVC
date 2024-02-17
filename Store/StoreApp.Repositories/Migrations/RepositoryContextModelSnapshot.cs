@@ -124,6 +124,9 @@ namespace StoreApp.Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("ShowCase")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Summary")
                         .HasColumnType("TEXT");
 
@@ -141,6 +144,7 @@ namespace StoreApp.Repositories.Migrations
                             ImageUrl = "/images/1.jpg",
                             Price = 17000m,
                             ProductName = "Computer",
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -150,6 +154,7 @@ namespace StoreApp.Repositories.Migrations
                             ImageUrl = "/images/2.jpg",
                             Price = 1000m,
                             ProductName = "Keyboard",
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -159,6 +164,7 @@ namespace StoreApp.Repositories.Migrations
                             ImageUrl = "/images/3.jpg",
                             Price = 500m,
                             ProductName = "Mouse",
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -168,6 +174,7 @@ namespace StoreApp.Repositories.Migrations
                             ImageUrl = "/images/4.jpg",
                             Price = 7000m,
                             ProductName = "Monitor",
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -177,6 +184,7 @@ namespace StoreApp.Repositories.Migrations
                             ImageUrl = "/images/5.jpg",
                             Price = 1500m,
                             ProductName = "Deck",
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -184,8 +192,9 @@ namespace StoreApp.Repositories.Migrations
                             ProductID = 6,
                             CategoryID = 1,
                             ImageUrl = "/images/6.jpg",
-                            Price = 1500m,
-                            ProductName = "Hamlet",
+                            Price = 25m,
+                            ProductName = "History",
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -193,8 +202,99 @@ namespace StoreApp.Repositories.Migrations
                             ProductID = 7,
                             CategoryID = 1,
                             ImageUrl = "/images/7.jpg",
-                            Price = 1500m,
-                            ProductName = "History",
+                            Price = 45m,
+                            ProductName = "Hamlet",
+                            ShowCase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 8,
+                            CategoryID = 1,
+                            ImageUrl = "/images/8.jpg",
+                            Price = 145m,
+                            ProductName = "A Doll's House",
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 9,
+                            CategoryID = 1,
+                            ImageUrl = "/images/9.jpg",
+                            Price = 4445m,
+                            ProductName = "Blindness",
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 10,
+                            CategoryID = 1,
+                            ImageUrl = "/images/10.jpg",
+                            Price = 545m,
+                            ProductName = "Boston",
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 11,
+                            CategoryID = 1,
+                            ImageUrl = "/images/11.jpg",
+                            Price = 385m,
+                            ProductName = "War and Piece",
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 12,
+                            CategoryID = 1,
+                            ImageUrl = "/images/12.jpg",
+                            Price = 845m,
+                            ProductName = "The Sound of the Mountain",
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 13,
+                            CategoryID = 1,
+                            ImageUrl = "/images/13.jpg",
+                            Price = 415m,
+                            ProductName = "The Idiot",
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 14,
+                            CategoryID = 1,
+                            ImageUrl = "/images/14.jpg",
+                            Price = 325m,
+                            ProductName = "The Trial",
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 15,
+                            CategoryID = 1,
+                            ImageUrl = "/images/15.jpg",
+                            Price = 99m,
+                            ProductName = "Masnavi",
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 16,
+                            CategoryID = 1,
+                            ImageUrl = "/images/16.jpg",
+                            Price = 199m,
+                            ProductName = "The Magic Mountain",
+                            ShowCase = false,
                             Summary = ""
                         });
                 });

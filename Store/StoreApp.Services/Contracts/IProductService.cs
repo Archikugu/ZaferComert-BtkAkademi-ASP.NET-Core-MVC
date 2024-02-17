@@ -1,5 +1,6 @@
 ﻿using StoreApp.Entities.Dtos;
 using StoreApp.Entities.Models;
+using StoreApp.Entities.RequestParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace StoreApp.Services.Contracts
     public interface IProductService
     {
         IEnumerable<Product> GetAllProducts(bool trackChanges);
+        IEnumerable<Product> GetAllProductsWithDetails(ProductRequestParameters p);
+        IEnumerable<Product> GetShowcaseProducts(bool trackChanges);
         Product? GetOneProduct(int id, bool trackChanges);
         void CreateProduct(ProductDtoForInsertion productDto);
         void UpdateOneProduct(ProductDtoForUpdate productDto);

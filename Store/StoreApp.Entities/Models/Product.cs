@@ -16,5 +16,6 @@ namespace StoreApp.Entities.Models
         public string? ImageUrl { get; set; }
         public int? CategoryID { get; set; }  //Foreign Key
         public Category? Category { get; set; }  // Navigation Property
+        public bool ShowCase { get; set; }
     }
 }
