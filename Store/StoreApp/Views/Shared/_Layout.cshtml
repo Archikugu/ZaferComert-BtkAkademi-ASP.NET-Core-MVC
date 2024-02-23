@@ -13,7 +13,7 @@
 <body>
     <header>
         <partial name="_Navbar" />
-        @RenderSection("Header",false)
+        @RenderSection("Header", false)
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -21,10 +21,10 @@
         </main>
     </div>
     <footer>
-        @RenderSection("Footer",false)
-        Footer
+        @RenderSection("Footer", false)
+        <partial name="_Footer" />
     </footer>
-    @await RenderSectionAsync("Scripts",required:false)
+    @await RenderSectionAsync("Scripts", required: false)
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>

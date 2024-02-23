@@ -1,12 +1,5 @@
 ﻿@model Product
 
-
-@section Header {
-    <div>
-        Header for only Get
-    </div>
-}
-
 <div class="row">
     <div class="col-md-12">
         <div class="text-center">
@@ -14,22 +7,32 @@
                 @Model.ProductName
             </h6>
 
-            <img class="img-fluid shadow rounted-3 my-3" src="@Model?.ImageUrl" alt="@Model?.ProductName" />
+            <img class="img-fluid shadow rounded-3 p-5 my-3" src="@Model?.ImageUrl" alt="@Model.ProductName" />
+
             <p class="lead text-danger">@Model.Price.ToString("c")</p>
         </div>
     </div>
 </div>
 
+
 <div class="text-center">
     <div class="btn-group">
-        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>Home</a>
+        <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
         <form id="@Model.ProductID" asp-page="/cart" method="post">
-        <input type="hidden" asp-for="ProductID" />    
-        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-            <button type="submit" class="btn btn-outline-primary">
+            <input type="hidden" asp-for="ProductID" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <button type="submit" class="btn btn-outline-secondary rounded-0">
                 <i class="fa fa-cart-plus"></i>
+                Add To Cart
             </button>
         </form>
-        <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index"><i class="fa-solid fa-list"></i>Products</a>
+        <a class="btn btn-outline-secondary" asp-controller="Product" asp-action="Index">
+            <i class="fa-solid fa-list"></i>
+            Products
+        </a>
     </div>
 </div>
+

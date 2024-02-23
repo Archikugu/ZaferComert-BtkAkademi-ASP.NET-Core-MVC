@@ -7,7 +7,7 @@
         public int MaxPrice { get; set; } = int.MaxValue;
         public bool IsValidPrice => MaxPrice > MinPrice;
         public int PageNumber { get; set; }
-        public int PageSize { get; set; }
+        public int PageSize { get; set; } 
 
         public ProductRequestParameters() : this(1, 6)
         {

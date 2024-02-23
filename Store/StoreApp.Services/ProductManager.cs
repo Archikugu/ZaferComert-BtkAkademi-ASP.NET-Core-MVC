@@ -50,6 +50,11 @@ namespace StoreApp.Services
             return _repositoryManager.Product.GetAllProductsWithDetails(p);
         }
 
+        public IEnumerable<Product> GetLastestProducts(int n, bool trackChanges)
+        {
+            return _repositoryManager.Product.FindAll(trackChanges).OrderByDescending(p => p.ProductID).Take(n);
+        }
+
         public Product? GetOneProduct(int id, bool trackChanges)
         {
             var product = _repositoryManager.Product.GetOneProduct(id, trackChanges);

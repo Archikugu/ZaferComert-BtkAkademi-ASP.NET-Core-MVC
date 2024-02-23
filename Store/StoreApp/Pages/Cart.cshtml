@@ -6,7 +6,7 @@ Cart(@Model.Cart.Lines.Count())
 
 <div>
     <div class="text-center display-6">Cart</div>
-    <table class="table table-hover">
+    <table >
         <thead>
             <tr>
                 <th>Product</th>
@@ -29,7 +29,8 @@ Cart(@Model.Cart.Lines.Count())
                             <input type="hidden" name="id" value="@item.Product.ProductID" />
                             <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
                             <button type="submit" class="btn btn-sm btn-danger">
-                                <i class="fa fa-trash"></i>Remove
+                                <i class="fa fa-trash"></i>
+                                Remove
                             </button>
                         </form>
                     </td>

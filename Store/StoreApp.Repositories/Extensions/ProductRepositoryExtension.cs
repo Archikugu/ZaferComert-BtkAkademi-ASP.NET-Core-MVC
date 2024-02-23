@@ -42,7 +42,7 @@ namespace StoreApp.Repositories.Extensions
         {
             return products
                 .Skip(((pageNumber - 1) * pageSize))
-                .Take(pageSize);
+                .Take(pageSize); 
         }
     }
 }
