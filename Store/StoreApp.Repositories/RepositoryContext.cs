@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using StoreApp.Entities.Models;
 using StoreApp.Repositories.Config;
 using System;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace StoreApp.Repositories
 {
-    public class RepositoryContext : DbContext
+    public class RepositoryContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }

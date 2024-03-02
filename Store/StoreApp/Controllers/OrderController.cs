@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StoreApp.Entities.Models;
 using StoreApp.Services.Contracts;
 
@@ -14,7 +15,7 @@ namespace StoreApp.Controllers
             _serviceManager = serviceManager;
             _cart = cart;
         }
-
+        [Authorize]
         public ViewResult CheckOut() => View(new Order());
 
         [HttpPost]

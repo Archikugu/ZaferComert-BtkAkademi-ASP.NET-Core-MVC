@@ -7,6 +7,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.ConfigureDbContext(builder.Configuration);
 
+builder.Services.ConfigureIdentity();
+
 builder.Services.ConfigureSession();
 
 builder.Services.ConfigureRepositoryRegistration();
@@ -14,6 +16,8 @@ builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServiceRegistration();
 
 builder.Services.ConfigureRouting();
+
+builder.Services.ConfigureApplicationCookie();
 
 
 
@@ -27,6 +31,9 @@ app.UseSession();
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(name: "Admin", areaName: "Admin", pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
@@ -36,7 +43,9 @@ app.UseEndpoints(endpoints =>
 });
 
 
+
 app.ConfigureAndCheckMigration();
 app.ConfigureLocalization();
+app.ConfigureDefaultAdminUser();
 
 app.Run();

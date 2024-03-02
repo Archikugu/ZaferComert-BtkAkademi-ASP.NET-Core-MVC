@@ -5,6 +5,9 @@ using StoreApp.Repositories;
 using StoreApp.Repositories.Contracts;
 using StoreApp.Services.Contracts;
 using StoreApp.Services;
+using Microsoft.AspNetCore.Identity;
+using Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace StoreApp.Infrastructure.Extensions
 {
@@ -15,7 +18,22 @@ namespace StoreApp.Infrastructure.Extensions
             services.AddDbContext<RepositoryContext>(options =>
             {
                 options.UseSqlite(configuration.GetConnectionString("sqlconnection"), b => b.MigrationsAssembly("StoreApp.Repositories"));
+                options.EnableSensitiveDataLogging(true);
             });
+        }
+
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+            }).AddEntityFrameworkStores<RepositoryContext>();
+
         }
 
         public static void ConfigureSession(this IServiceCollection services)
@@ -43,7 +61,20 @@ namespace StoreApp.Infrastructure.Extensions
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<IOrderService, OrderManager>();
+            services.AddScoped<IAuthService, AuthManager>();
         }
+
+        public static void ConfigureApplicationCookie(this IServiceCollection services)
+        {
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Account/Login");
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.AccessDeniedPath = new PathString("/Account/AccessDenied");
+            });
+        }
+
         public static void ConfigureRouting(this IServiceCollection services)
         {
             services.AddRouting(options =>
