@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using StoreApp.Entities.Dtos;
 using StoreApp.Entities.Models;
+using StoreApp.Entities.RequestParameters;
+using StoreApp.Models;
 using StoreApp.Services.Contracts;
 
 namespace StoreApp.Areas.Admin.Controllers
@@ -19,11 +21,24 @@ namespace StoreApp.Areas.Admin.Controllers
             _serviceManager = serviceManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromQuery] ProductRequestParameters p)
         {
-            var model = _serviceManager.ProductService.GetAllProducts(false);
-            return View(model);
+            ViewData["Title"] = "Products";
+
+            var products = _serviceManager.ProductService.GetAllProductsWithDetails(p);
+            var pagination = new Pagination()
+            {
+                CurrenPage = p.PageNumber,
+                ItemsPerPage = p.PageSize,
+                TotalItems = _serviceManager.ProductService.GetAllProducts(false).Count()
+            };
+            return View(new ProductListViewModel()
+            {
+                Products = products,
+                Pagination = pagination
+            });
         }
+
         public IActionResult Create()
         {
             ViewBag.Categories = GetCategoriesSelectList();
@@ -49,6 +64,7 @@ namespace StoreApp.Areas.Admin.Controllers
                 }
                 productDto.ImageUrl = String.Concat("/images/", file.FileName);
                 _serviceManager.ProductService.CreateProduct(productDto);
+                TempData["success"] = $"{productDto.ProductName} has been created.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -57,8 +73,10 @@ namespace StoreApp.Areas.Admin.Controllers
         {
             ViewBag.Categories = GetCategoriesSelectList();
             var model = _serviceManager.ProductService.GetOneProductForUpdate(id, false);
+            ViewData["Title"] = model?.ProductName;
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update([FromForm] ProductDtoForUpdate productDto, IFormFile file)
@@ -66,12 +84,15 @@ namespace StoreApp.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // file operation
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", file.FileName);
+                string path = Path.Combine(Directory.GetCurrentDirectory(),
+                "wwwroot", "images", file.FileName);
+
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
                 productDto.ImageUrl = String.Concat("/images/", file.FileName);
+
                 _serviceManager.ProductService.UpdateOneProduct(productDto);
                 return RedirectToAction("Index");
             }
@@ -81,12 +102,9 @@ namespace StoreApp.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Delete([FromRoute(Name = "id")] int id)
         {
-            if (ModelState.IsValid)
-            {
-                _serviceManager.ProductService.DeleteOneProduct(id);
-                return RedirectToAction("Index");
-            }
-            return View();
+            _serviceManager.ProductService.DeleteOneProduct(id);
+            TempData["danger"] = "The product has been removed.";
+            return RedirectToAction("Index");
         }
     }
 }

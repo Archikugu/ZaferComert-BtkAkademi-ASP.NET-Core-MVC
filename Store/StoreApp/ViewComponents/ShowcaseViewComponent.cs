@@ -5,17 +5,19 @@ namespace StoreApp.ViewComponents
 {
     public class ShowcaseViewComponent : ViewComponent
     {
-        private readonly IServiceManager _serviceManager;
+        private readonly IServiceManager _manager;
 
-        public ShowcaseViewComponent(IServiceManager serviceManager)
+        public ShowcaseViewComponent(IServiceManager manager)
         {
-            _serviceManager = serviceManager;
+            _manager = manager;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string page = "default")
         {
-            var products = _serviceManager.ProductService.GetShowcaseProducts(false);
-            return View(products);
+            var products = _manager.ProductService.GetShowcaseProducts(false);
+            return page.Equals("default")
+                ? View(products)
+                : View("List", products);
         }
     }
 }
